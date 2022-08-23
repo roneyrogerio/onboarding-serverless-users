@@ -1,0 +1,21 @@
+{
+  "name": "onboarding-serverless-users",
+  "version": "1.0.0",
+  "description": "This repo is meant to be used for PR analysis of people learning serverless framework ",
+  "scripts": {
+    "say": "cowthink \"I'm a moooodule\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/roneyrogerio/onboarding-serverless-users.git"
+  },
+  "author": "rde-oliv (Roney)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/roneyrogerio/onboarding-serverless-users/issues"
+  },
+  "homepage": "https://github.com/roneyrogerio/onboarding-serverless-users#readme",
+  "dependencies": {
+    "cowsay": "^1.5.0"
+  }
+}
