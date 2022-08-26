@@ -7,9 +7,18 @@
     {
       "type": "node",
       "request": "launch",
-      "name": "Ramdom Sentences Generator",
+      "name": "Random Sentences Generator",
       "skipFiles": ["<node_internals>/**"],
       "program": "${workspaceFolder}/src/slug/index.ts",
+      "preLaunchTask": "tsc: build - tsconfig.json",
+      "outFiles": ["${workspaceFolder}/**/*.js"]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Cow Say Random Sentence",
+      "skipFiles": ["<node_internals>/**"],
+      "program": "${workspaceFolder}/src/cow-slug/index.ts",
       "preLaunchTask": "tsc: build - tsconfig.json",
       "outFiles": ["${workspaceFolder}/**/*.js"]
     }

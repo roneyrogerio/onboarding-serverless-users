@@ -6,6 +6,8 @@
     "say": "cowthink \"I'm a moooodule\"",
     "preslug": "npx tsc",
     "slug": "node ./dist/slug/index.js",
+    "precow-slug": "npx tsc",
+    "cow-slug": "node ./dist/cow-slug/index.js",
     "test": "jest"
   },
   "repository": {
