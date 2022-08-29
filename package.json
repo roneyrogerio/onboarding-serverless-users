@@ -4,10 +4,11 @@
   "description": "This repo is meant to be used for PR analysis of people learning serverless framework ",
   "scripts": {
     "say": "cowthink \"I'm a moooodule\"",
-    "preslug": "npx tsc",
+    "preslug": "tsc",
     "slug": "node ./dist/slug/index.js",
-    "precow-slug": "npx tsc",
+    "precow-slug": "tsc",
     "cow-slug": "node ./dist/cow-slug/index.js",
+    "build": "tsc",
     "test": "jest",
     "lint": "eslint ."
   },
