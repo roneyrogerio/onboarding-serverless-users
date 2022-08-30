@@ -1,6 +1,19 @@
-/** @type {import('ts-jest/dist/types').InitialOptionsTsJest} */
+// eslint-disable-next-line import/no-commonjs
 module.exports = {
-  roots: ["<rootDir>/src"],
-  preset: "ts-jest",
-  testEnvironment: "node",
+  testMatch: ['**/?(*.)+(spec|test).+(ts|tsx|js)'],
+  transform: {
+    '^.+\\.tsx?$': [
+      'esbuild-jest',
+      {
+        sourcemap: true, // correct line numbers in code coverage
+      },
+    ],
+  },
+  collectCoverage: true,
+  collectCoverageFrom: ["./src/**"],
+  coverageThreshold: {
+    global: {
+      lines: 3,
+    },
+  },
 };
