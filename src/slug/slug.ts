@@ -6,10 +6,9 @@ export function randomSentencesArray(centencesQty: number): string[] {
   for (let centence = 0; centence < centencesQty; centence += 1) {
     // ramdom words between 2 and 10
     const sentenceWordsQty: number = Math.floor(Math.random() * 9) + 2;
-    const sentence: string = generateSlug(sentenceWordsQty, {
+    sentences.push(generateSlug(sentenceWordsQty, {
       format: "sentence",
-    });
-    sentences.push(sentence);
+    }));
   }
 
   return sentences;

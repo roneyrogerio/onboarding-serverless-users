@@ -1,0 +1,42 @@
+service: onboarding-serverless-users
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  stage: dev
+  region: us-east-1
+  memorySize: 128
+  timeout: 3
+
+functions:
+  person:
+    handler: src/handler/getPersonList/index.handler
+    description: List all persons
+    events:
+      - http:
+          path: /person
+          method: get
+  personById:
+    handler: src/handler/getPersonById/index.handler
+    description: Get person by id
+    events:
+      - http:
+          path: /person/{id}
+          method: get
+
+plugins:
+  - serverless-esbuild
+  - serverless-offline
+  - serverless-prune-plugin
+
+custom:
+  esbuild:
+    minify: false
+    bundle: true
+    sourcemap: true
+    watch:
+      pattern: ["src/**/*.ts"]
+      ignore: [".serverless/**/*", ".build", ".esbuild"]
+  prune:
+    automatic: true
+    number: 3

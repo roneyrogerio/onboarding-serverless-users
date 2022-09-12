@@ -2,10 +2,7 @@
 module.exports = {
   root: true,
   parser: "@typescript-eslint/parser",
-  plugins: [
-    "@typescript-eslint",
-    "jest",
-  ],
+  plugins: ["@typescript-eslint", "jest"],
   extends: [
     "plugin:@shopify/typescript-type-checking",
     "plugin:@shopify/esnext",
@@ -13,9 +10,9 @@ module.exports = {
   ],
   settings: {
     // necessary to make import rules to find files
-    'import/resolver': {
+    "import/resolver": {
       node: {
-        extensions: ['.js', '.jsx', '.ts', '.tsx'],
+        extensions: [".js", ".jsx", ".ts", ".tsx"],
       },
     },
   },
@@ -31,32 +28,51 @@ module.exports = {
     "promise/prefer-await-to-callbacks": "error",
     "import/no-commonjs": "error",
     "import/no-amd": "error",
-    "import/max-dependencies": ["error", {
-      max: 20,
-      ignoreTypeImports: false,
-    }],
+    "import/max-dependencies": [
+      "error",
+      {
+        max: 20,
+        ignoreTypeImports: false,
+      },
+    ],
     "import/no-unassigned-import": "error",
     "import/group-exports": "error",
-    camelcase: ["error", {
-      properties: "always",
-      ignoreDestructuring: true,
-      ignoreImports: true,
-      ignoreGlobals: true,
-    },
+    camelcase: [
+      "error",
+      {
+        properties: "always",
+        ignoreDestructuring: true,
+        ignoreImports: true,
+        ignoreGlobals: true,
+      },
     ],
     "no-unused-expressions": "error",
     "valid-typeof": "error",
     "new-cap": "error",
     "no-invalid-this": "error",
-    complexity: ["error", { max: 2 }],
+    complexity: ["error", { max: 10 }],
+    "max-depth": ["error", 3],
+    "max-nested-callbacks": ["error", { max: 5 }],
+    "max-params": ["error", 2],
+    "max-lines": ["error", 150],
+    "max-lines-per-function": ["error", 25],
+    "max-statements": ["error", 5],
     "no-else-return": "error",
-    "max-depth": ["error", 4],
-    "max-len": ["error", { code: 120, comments: 100, ignoreTemplateLiterals: true, ignoreStrings: true, ignoreTrailingComments: true, ignoreUrls: true }],
+    "max-len": [
+      "error",
+      {
+        code: 120,
+        comments: 100,
+        ignoreTemplateLiterals: true,
+        ignoreStrings: true,
+        ignoreTrailingComments: true,
+        ignoreUrls: true,
+      },
+    ],
     "no-bitwise": "error",
     "no-plusplus": "error",
     "no-debugger": "error",
     "@shopify/jest/no-snapshots": "error",
-    "max-nested-callbacks": ["error", { max: 5 }],
     "no-undefined": "error",
     "@typescript-eslint/explicit-function-return-type": "error",
     "@typescript-eslint/no-non-null-assertion": "error",
@@ -77,5 +93,4 @@ module.exports = {
     "@babel/object-curly-spacing": "off",
     "line-comment-position": "off",
   },
-
 };
