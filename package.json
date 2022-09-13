@@ -10,7 +10,10 @@
     "cow-slug": "node ./dist/cow-slug/index.js",
     "build": "esbuild ./src/cow-slug/index.ts ./src/slug/index.ts --bundle --platform=node --target=node14 --outdir=dist --sourcemap  && cp -r node_modules/cowsay/cows ./dist",
     "test": "jest",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "sls:package": "sls package",
+    "sls:deploy": "sls deploy",
+    "sls:remove": "sls remove"
   },
   "repository": {
     "type": "git",
