@@ -27,9 +27,12 @@
   "homepage": "https://github.com/roneyrogerio/onboarding-serverless-users#readme",
   "dependencies": {
     "aws-lambda": "^1.0.7",
+    "aws-sdk": "^2.1219.0",
+    "axios": "^0.27.2",
     "cowsay": "^1.5.0",
     "esbuild": "^0.15.5",
-    "random-word-slugs": "^0.1.6"
+    "random-word-slugs": "^0.1.6",
+    "zod": "^3.19.1"
   },
   "devDependencies": {
     "@shopify/eslint-plugin": "^42.0.1",

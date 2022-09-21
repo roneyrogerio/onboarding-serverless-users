@@ -7,22 +7,54 @@ provider:
   region: us-east-1
   memorySize: 128
   timeout: 3
+  environment:
+    DYNAMODB_PERSON_TABLE: ${self:service}-personTable-${sls:stage}
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action:
+        - "dynamodb:PutItem"
+        - "dynamodb:Get*"
+        - "dynamodb:Scan*"
+        - "dynamodb:UpdateItem"
+        - "dynamodb:DeleteItem"
+      Resource: arn:aws:dynamodb:${aws:region}:${aws:accountId}:table/${self:service}-personTable-${sls:stage}
 
 functions:
-  person:
+  createPerson:
+    handler: src/handler/createPerson/index.handler
+    description: Create new person
+    events:
+      - http:
+          path: /person
+          method: post
+  getPerson:
     handler: src/handler/getPersonList/index.handler
     description: List all persons
     events:
       - http:
           path: /person
           method: get
-  personById:
+  getPersonById:
     handler: src/handler/getPersonById/index.handler
     description: Get person by id
     events:
       - http:
           path: /person/{id}
           method: get
+
+resources:
+  Resources:
+    PersonTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        BillingMode: PAY_PER_REQUEST
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        TableName: ${self:service}-personTable-${sls:stage}
 
 plugins:
   - serverless-esbuild

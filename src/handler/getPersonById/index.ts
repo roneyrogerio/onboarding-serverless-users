@@ -1,27 +1,19 @@
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda';
 
-import { getPersonById } from '../../pseudoDB/index';
+import { getPersonById } from '../../services/person';
 
 export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
-  if (event.pathParameters && event.pathParameters.id && isNaN(Number(event.pathParameters.id))) {
-    return {
-      statusCode: 400,
-      body: JSON.stringify({ code: 400, error: "The 'id' parameter must be a number." }),
-    };
-  }
+  const id = event.pathParameters && event.pathParameters.id ? event.pathParameters.id : '0';
+  const res = await getPersonById(id);
 
-  const id = event.pathParameters && event.pathParameters.id ? parseInt(event.pathParameters.id, 10) : 0;
-  const person = getPersonById(id);
-
-  if (person) {
+  if (res.data) {
     return {
       statusCode: 200,
-      body: JSON.stringify(person),
+      body: JSON.stringify(res.data),
     };
   }
-
   return {
-    statusCode: 404,
-    body: JSON.stringify({ code: 404, error: "Not Found." }),
+    statusCode: res.error ? res.error.code : 500,
+    body: JSON.stringify(res.error),
   };
 };
