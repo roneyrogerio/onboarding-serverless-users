@@ -9,15 +9,6 @@ provider:
   timeout: 3
   environment:
     DYNAMODB_PERSON_TABLE: ${self:service}-personTable-${sls:stage}
-  iamRoleStatements:
-    - Effect: "Allow"
-      Action:
-        - "dynamodb:PutItem"
-        - "dynamodb:Get*"
-        - "dynamodb:Scan*"
-        - "dynamodb:UpdateItem"
-        - "dynamodb:DeleteItem"
-      Resource: arn:aws:dynamodb:${aws:region}:${aws:accountId}:table/${self:service}-personTable-${sls:stage}
 
 functions:
   createPerson:
