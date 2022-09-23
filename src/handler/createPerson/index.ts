@@ -12,13 +12,13 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
   } catch (error: any) {
     if (error.name && error.name === "ZodError") {
       return {
-        statusCode: 400,
-        body: JSON.stringify({ code: 400, detail: error.issues }),
+        statusCode: 422,
+        body: JSON.stringify({ code: 422, detail: error.issues }),
       };
     }
     return {
-      statusCode: 422,
-      body: JSON.stringify({ code: 422, detail: "Bad JSON payload" }),
+      statusCode: 400,
+      body: JSON.stringify({ code: 400, detail: "Bad JSON payload" }),
     };
   }
 
