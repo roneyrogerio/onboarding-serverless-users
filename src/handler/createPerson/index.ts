@@ -3,7 +3,7 @@ import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda';
 import { createPerson } from '../../services/person';
 import { tPerson, vPerson } from '../../model/contract';
 
-export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
+const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
   let parameters: tPerson;
 
   try {
@@ -35,3 +35,5 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
     body: JSON.stringify(res.error),
   };
 };
+
+export = { handler }

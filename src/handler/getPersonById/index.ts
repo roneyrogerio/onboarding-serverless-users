@@ -2,7 +2,7 @@ import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda';
 
 import { getPersonById } from '../../services/person';
 
-export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
+const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
   const id = String(event.pathParameters?.id);
   const res = await getPersonById(id);
 
@@ -17,3 +17,5 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
     body: JSON.stringify(res.error),
   };
 };
+
+export = { handler }

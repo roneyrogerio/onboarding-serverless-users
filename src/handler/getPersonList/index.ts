@@ -2,7 +2,7 @@ import { APIGatewayProxyResult } from 'aws-lambda';
 
 import { getPersonList } from '../../services/person';
 
-export const handler = async (): Promise<APIGatewayProxyResult> => {
+const handler = async (): Promise<APIGatewayProxyResult> => {
   const res = await getPersonList();
 
   if (res.data) {
@@ -16,3 +16,5 @@ export const handler = async (): Promise<APIGatewayProxyResult> => {
     body: JSON.stringify(res.error),
   };
 };
+
+export = { handler }

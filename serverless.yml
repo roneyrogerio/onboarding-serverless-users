@@ -6,9 +6,15 @@ provider:
   stage: dev
   region: us-east-1
   memorySize: 128
-  timeout: 3
+  timeout: 10
+  tracing:
+    lambda: true
+    apiGateway: true
+  layers:
+    - !Sub arn:aws:lambda:${AWS::Region}:901920570463:layer:aws-otel-nodejs-amd64-ver-1-6-0:1
   environment:
     DYNAMODB_PERSON_TABLE: ${self:service}-personTable-${sls:stage}
+    AWS_LAMBDA_EXEC_WRAPPER: /opt/otel-handler
   iam:
     role:
       statements:
