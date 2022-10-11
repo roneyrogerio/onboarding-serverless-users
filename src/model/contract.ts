@@ -1,5 +1,6 @@
 import { z } from "zod";
 
+// Person
 type tPerson = {
   id: string,
   name: string,
@@ -27,10 +28,44 @@ const vPerson: z.ZodType<tPerson> = z.lazy(() =>
     coordinates: z.never().optional(),
   }));
 
+// Error
 type tError = {code: number, detail: string | Array<any> };
+
+// Trouble Marker
+const TROUBLE_MARKER_MODE_EXCEPTION = 'exception';
+const TROUBLE_MARKER_MODE_STATUS_500 = 'status500';
+const TROUBLE_MARKER_MODE_LATENCY = 'latency';
+const TROUBLE_MARKER_MODES = [TROUBLE_MARKER_MODE_EXCEPTION,
+  TROUBLE_MARKER_MODE_STATUS_500,
+  TROUBLE_MARKER_MODE_LATENCY] as const;
+
+type tTroubleMarker = {
+  which: string,
+  time_ms?: number,
+}
+
+const vTroubleMarker = z
+.object({
+  which: z.enum(TROUBLE_MARKER_MODES),
+  // eslint-disable-next-line camelcase
+  time_ms: z.preprocess(
+    (number) => parseInt(z.string().parse(number), 10),
+    z.number().positive().gt(0),
+  ).optional(),
+})
+.refine(
+  (data) => Boolean(data.which === TROUBLE_MARKER_MODE_LATENCY ? data.time_ms : true),
+  "The 'time_ms' parameter is required when the parameter 'which' is equal to 'latency'",
+);
 
 export {
   tPerson,
   vPerson,
   tError,
+  tTroubleMarker,
+  vTroubleMarker,
+  TROUBLE_MARKER_MODE_EXCEPTION,
+  TROUBLE_MARKER_MODE_LATENCY,
+  TROUBLE_MARKER_MODE_STATUS_500,
+  TROUBLE_MARKER_MODES,
 };

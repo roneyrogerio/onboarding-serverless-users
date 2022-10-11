@@ -50,6 +50,13 @@ functions:
       - http:
           path: /person/{id}
           method: get
+  troubleMaker:
+    handler: src/handler/troubleMaker/index.handler
+    description: Trouble maker
+    events:
+      - http:
+          path: /trouble-maker
+          method: get
 
 resources:
   Resources:
@@ -69,6 +76,7 @@ plugins:
   - serverless-esbuild
   - serverless-offline
   - serverless-prune-plugin
+  - serverless-plugin-aws-alerts
 
 custom:
   esbuild:
@@ -81,3 +89,30 @@ custom:
   prune:
     automatic: true
     number: 3
+  alerts:
+    dashboards: true
+    topics:
+      alarm:
+        topic: ${self:service}-${sls:stage}-alerts-alarm
+        notifications:
+          - protocol: email
+            endpoint: ${MY_EMAIL}
+    definitions:
+      functionErrors:
+        namespace: "AWS/Lambda"
+        actionsEnabled: true
+        threshold: 2
+        period: 60
+        evaluationPeriods: 1
+        comparisonOperator: GreaterThanOrEqualToThreshold
+      functionDuration:
+        namespace: "AWS/Lambda"
+        metric: Duration
+        threshold: 1000
+        statistic: Average
+        period: 60
+        evaluationPeriods: 1
+        comparisonOperator: GreaterThanThreshold
+    alarms:
+      - functionErrors
+      - functionDuration
