@@ -13,7 +13,7 @@ provider:
   layers:
     - !Sub arn:aws:lambda:${AWS::Region}:901920570463:layer:aws-otel-nodejs-amd64-ver-1-6-0:1
   environment:
-    DYNAMODB_PERSON_TABLE: ${self:service}-personTable-${sls:stage}
+    DYNAMODB_PERSON_TABLE: ${self:service}-personTable-${sls:stage}-${env:MY_EMAIL}
     AWS_LAMBDA_EXEC_WRAPPER: /opt/otel-handler
   iam:
     role:
@@ -96,7 +96,7 @@ custom:
         topic: ${self:service}-${sls:stage}-alerts-alarm
         notifications:
           - protocol: email
-            endpoint: !Sub ${env:MY_EMAIL}
+            endpoint: ${env:MY_EMAIL}
     definitions:
       functionErrors:
         namespace: "AWS/Lambda"
