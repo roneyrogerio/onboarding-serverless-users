@@ -15,6 +15,7 @@ provider:
   environment:
     DYNAMODB_PERSON_TABLE: ${self:service}-personTable-${sls:stage}
     AWS_LAMBDA_EXEC_WRAPPER: /opt/otel-handler
+    MY_EMAIL: roneyrogerio92@gmail.com
   iam:
     role:
       statements:
