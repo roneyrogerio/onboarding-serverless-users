@@ -96,7 +96,7 @@ custom:
         topic: ${self:service}-${sls:stage}-alerts-alarm
         notifications:
           - protocol: email
-            endpoint: ${self:MY_EMAIL}
+            endpoint: ${env:MY_EMAIL}
     definitions:
       functionErrors:
         namespace: "AWS/Lambda"
